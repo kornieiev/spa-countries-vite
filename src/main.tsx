@@ -7,7 +7,7 @@ import "./index.css";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <BrowserRouter basename='/spa-countries-vite'>
+    <BrowserRouter basename='/spa-countries-vite/'>
       <App />
     </BrowserRouter>
   </StrictMode>
