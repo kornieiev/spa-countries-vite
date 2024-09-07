@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, FC, ReactNode } from "react";
 import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
 
@@ -18,7 +18,11 @@ export const Btn = styled(Link)`
   cursor: pointer;
 `;
 
-export const Button = ({ children }) => {
+interface ButtonProps {
+  children: ReactNode;
+}
+
+export const Button: FC<ButtonProps> = ({ children }) => {
   const location = useLocation();
 
   const backLinkLocationRef = useRef(location.state?.from ?? "/");

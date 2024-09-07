@@ -9,12 +9,20 @@ import { Card } from "../components/Card/Card";
 
 import { Controls } from "../components/Controls/Controls";
 
-export const HomePage = ({ setCountries, countries }) => {
-  const [filteredCountries, setFilteredCountries] = useState(countries);
+import { Country, CountryInfo } from "../interfaces";
+
+interface HomePageProps {
+  setCountries: (data: Country[]) => void;
+  countries: Country[];
+}
+
+export const HomePage = ({ setCountries, countries }: HomePageProps) => {
+  const [filteredCountries, setFilteredCountries] =
+    useState<Country[]>(countries);
   const navigate = useNavigate();
 
   const handleSearch = useCallback(
-    (search, region) => {
+    (search: string, region: string): void => {
       let data = [...countries];
 
       if (region) {
@@ -41,8 +49,8 @@ export const HomePage = ({ setCountries, countries }) => {
     <>
       <Controls onSearch={handleSearch} />
       <List>
-        {filteredCountries.map((c) => {
-          const countryInfo = {
+        {filteredCountries.map((c: Country) => {
+          const countryInfo: CountryInfo = {
             img: c.flags.png,
             name: c.name.common,
             info: [

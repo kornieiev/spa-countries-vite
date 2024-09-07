@@ -8,8 +8,10 @@ import { Details } from "./pages/Details";
 import { NotFound } from "./pages/NotFound";
 import { useState } from "react";
 
+import { Country } from "./interfaces";
+
 function App() {
-  const [countries, setCountries] = useState([]);
+  const [countries, setCountries] = useState<Country[]>([]);
 
   return (
     <>

@@ -1,8 +1,9 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { filterByCode } from "../../../config";
+import { Country } from "../../../interfaces";
 
 const Wrapper = styled.section`
   margin-top: 3rem;
@@ -97,21 +98,38 @@ const Tag = styled(Link)`
   text-decoration: none;
 `;
 
-export const Info = (props) => {
-  const [neibhors, setNeibhors] = useState([]);
+interface Info {
+  name: {
+    common: string;
+    official: string;
+  };
+  flags: {
+    alt: string;
+    png: string;
+  };
+  capital: string;
+  population: number;
+  region: string;
+  subregion: string;
+  tld: string[];
+  currencies: [];
+  languages: { [key: string]: string };
+  borders: string[];
+}
 
-  const {
-    name,
-    flags,
-    capital,
-    population,
-    region,
-    subregion,
-    tld = [],
-    currencies = [],
-    languages = [],
-    borders = [],
-  } = props;
+export const Info: FC<Info> = ({
+  name,
+  flags,
+  capital,
+  population,
+  region,
+  subregion,
+  tld = [],
+  currencies = {},
+  languages = {},
+  borders = [],
+}) => {
+  const [neibhors, setNeibhors] = useState([]);
 
   useEffect(() => {
     axios
@@ -172,7 +190,7 @@ export const Info = (props) => {
           {neibhors.length < 1 ? (
             <span>There is no borders with other countries</span>
           ) : (
-            neibhors.map((b) => {
+            neibhors.map((b: Country) => {
               return (
                 <Tag key={b.name.common} to={`/country/${b.name.common}`}>
                   {b.name.common}

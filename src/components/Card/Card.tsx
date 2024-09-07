@@ -2,7 +2,9 @@ import styled from "styled-components";
 
 import { useLocation } from "react-router-dom";
 
-const Wrapper = styled.article`
+import { CountryInfo, WrapperProps } from "../../interfaces";
+
+const Wrapper = styled.article<WrapperProps>`
   border-radius: var(--radii);
   background-color: var(--colors-ui-base);
   box-shadow: var(--shadow);
@@ -45,7 +47,7 @@ const CardListItem = styled.li`
   }
 `;
 
-export const Card = ({ img, name, info = [], onClick }) => {
+export const Card = ({ img, name, info = [], onClick }: CountryInfo) => {
   const location = useLocation();
 
   return (
@@ -54,11 +56,13 @@ export const Card = ({ img, name, info = [], onClick }) => {
       <CardBody>
         <CardTitle>{name}</CardTitle>
         <CardList>
-          {info.map((el) => (
-            <CardListItem key={el.title}>
-              <b>{el.title}:</b> {el.description}
-            </CardListItem>
-          ))}
+          {info.map((el: { title: string; description: string }) => {
+            return (
+              <CardListItem key={el.title}>
+                <b>{el.title}:</b> {el.description}
+              </CardListItem>
+            );
+          })}
         </CardList>
       </CardBody>
     </Wrapper>

@@ -7,7 +7,7 @@ import { Button } from "../components/Button/Button";
 import { Info } from "../components/Details/Info/Info";
 
 export const Details = () => {
-  const [country, setCountry] = useState(null);
+  const [country, setCountry] = useState<object | null>(null);
 
   const { name } = useParams(); // Получаем параметр 'name' из URL
 

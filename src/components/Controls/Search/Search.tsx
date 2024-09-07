@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 import { IoSearch } from "react-icons/io5";
+import { FC } from "react";
 
 const InputContainer = styled.label`
   background-color: var(--colors-ui-base);
@@ -30,7 +31,12 @@ const Input = styled.input.attrs({
   background-color: var(--colors-ui-base);
 `;
 
-export const Search = ({ search, setSearch }) => {
+interface Search {
+  search: string;
+  setSearch: (value: string) => void;
+}
+
+export const Search: FC<Search> = ({ search, setSearch }) => {
   return (
     <InputContainer>
       <IoSearch />

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { Search } from "./Search/Search";
 import { CustomSelect } from "./CustomSelect/CustomSelect";
 
@@ -23,19 +23,30 @@ const Wrapper = styled.div`
     align-items: center;
   }
 `;
+interface Controls {
+  onSearch: (search: string, regionValue: string) => void;
+}
+interface Region {
+  value: string;
+  label: string;
+}
 
-export const Controls = ({ onSearch }) => {
-  const [search, setSearch] = useState("");
-  const [region, setRegion] = useState("");
+export const Controls: FC<Controls> = ({ onSearch }) => {
+  const [search, setSearch] = useState<string>("");
+  const [region, setRegion] = useState<Region | null>(null);
 
   useEffect(() => {
-    const regionValue = region?.value || "";
+    const regionValue: string = region?.value || "";
     onSearch(search, regionValue);
   }, [onSearch, region, search]);
 
   return (
     <Wrapper>
-      <Search search={search} setSearch={setSearch} onSearch={onSearch} />
+      <Search
+        search={search}
+        setSearch={setSearch}
+        // onSearch={onSearch}
+      />
       <CustomSelect
         options={options}
         placeholder='Filter by Region'
