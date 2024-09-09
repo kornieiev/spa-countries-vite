@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 import { Container } from "../Container/Container";
+import { ChildrenProps } from "../../interfaces";
 
 const Wrapper = styled.main`
   padding: 2rem 0;
@@ -10,7 +11,7 @@ const Wrapper = styled.main`
   }
 `;
 
-export const Main = ({ children }) => {
+export const Main = ({ children }: ChildrenProps) => {
   return (
     <Wrapper>
       <Container>{children}</Container>

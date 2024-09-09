@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { ChildrenProps } from "../../interfaces";
 
 const Wrapper = styled.section`
   width: 100%;
@@ -20,6 +21,6 @@ const Wrapper = styled.section`
   }
 `;
 
-export const List = ({ children }) => {
+export const List = ({ children }: ChildrenProps) => {
   return <Wrapper>{children}</Wrapper>;
 };

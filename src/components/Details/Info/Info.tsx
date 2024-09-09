@@ -104,20 +104,25 @@ interface Info {
     official: string;
   };
   flags: {
-    alt: string;
+    alt?: string | undefined;
     png: string;
   };
-  capital: string;
+  capital: string[] | object;
   population: number;
   region: string;
-  subregion: string;
-  tld: string[];
-  currencies: [];
-  languages: { [key: string]: string };
-  borders: string[];
+  subregion?: string | undefined;
+  tld?: string[] | object;
+  currencies?: {
+    [key: string]: {
+      name?: string;
+      symbol?: string;
+    };
+  };
+  languages?: { [key: string]: string };
+  borders?: string[] | object;
 }
 
-export const Info: FC<Info> = ({
+export const Info = ({
   name,
   flags,
   capital,
@@ -128,15 +133,32 @@ export const Info: FC<Info> = ({
   currencies = {},
   languages = {},
   borders = [],
-}) => {
+}: Info) => {
   const [neibhors, setNeibhors] = useState([]);
+  // console.log("name", name, typeof name);
+  // console.log("name", name.common, typeof name.common);
+  // console.log("name", name.official, typeof name.official);
+
+  // console.log("flags", flags, typeof flags);
+  // console.log("flags", flags.alt, typeof flags.alt);
+  // console.log("flags", flags.png, typeof flags.png);
+
+  // console.log("capital", capital, typeof capital);
+  // console.log("population", population, typeof population);
+  // console.log("region", region, typeof region);
+
+  // console.log("subregion", subregion, typeof subregion);
+  // console.log("tld", tld, typeof tld);
+  // console.log("currencies", currencies, typeof currencies);
+  // console.log("languages", languages, typeof languages);
+  // console.log("borders", borders, typeof borders);
 
   useEffect(() => {
     axios
       .get(filterByCode(borders))
       .then(({ data }) => setNeibhors(data))
       .catch((error) => {
-        // console.error("Error fetching neighboring countries:", error);
+        console.error("Error fetching neighboring countries:", error.status);
       });
   }, [borders]);
 

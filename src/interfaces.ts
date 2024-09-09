@@ -40,3 +40,7 @@ export interface WrapperProps {
     };
   };
 }
+
+export interface ChildrenProps {
+  children: React.ReactNode;
+}
